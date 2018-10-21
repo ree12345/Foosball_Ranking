@@ -80,8 +80,7 @@ def teamDetail(request,pk):
 
 def showLeaderboard(request,type):
 	if type=='FS' or type=='foosball':
-		teams = Team.objects.all().annotate(title_count=Count('-foosball_points'), distint=True)\
-            .filter(title_count__gt=10).order_by('-foosball_points')[:100]
+		teams = Team.objects.all().order_by('-foosball_points')[:100]
 	else:
 		teams = Team.objects.all().order_by('-tt_points')[:10]
 	return render(request,'leaderboard.html',{'teams':teams})
